@@ -55,6 +55,8 @@ class JsonSerializableOutput(BaseOutputAdapter):
 
             result = result_conc[s]
             try:
+                if isinstance(result, SimpleResponse):
+                    responses[i] = result
                 json_output = json.dumps(result, cls=NumpyJsonEncoder)
                 responses[i] = SimpleResponse(
                     200, (("Content-Type", "application/json"),), json_output
